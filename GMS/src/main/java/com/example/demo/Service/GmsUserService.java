@@ -24,8 +24,7 @@ public class GmsUserService {
 
     public GmsUser saveGoogleUser(String email, String refreshToken) {
 
-        GmsUser user = userRepository.findByEmail(email)
-                .orElseGet(() -> {
+        GmsUser user = userRepository.findByEmail(email).orElseGet(() -> {
                     GmsUser newUser = new GmsUser();
                     newUser.setEmail(email);
                     return newUser;

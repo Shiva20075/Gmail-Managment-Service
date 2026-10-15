@@ -10,17 +10,14 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequest
 public class OAuth2AuthorizationConfig {
 
     @Bean
-    public OAuth2AuthorizationRequestResolver authorizationRequestResolver(
-            ClientRegistrationRepository repository) {
+    public OAuth2AuthorizationRequestResolver authorizationRequestResolver(ClientRegistrationRepository repository) {
 
-        var resolver = new DefaultOAuth2AuthorizationRequestResolver(
-                repository, "/oauth2/authorization");
+        var resolver = new DefaultOAuth2AuthorizationRequestResolver(repository, "/oauth2/authorization");
 
-        resolver.setAuthorizationRequestCustomizer(builder ->
-                builder.additionalParameters(params -> {
+        resolver.setAuthorizationRequestCustomizer(builder -> builder.additionalParameters(params -> {
                     params.put("access_type", "offline");
                     params.put("prompt", "consent");
-                }));
+        }));
 
         return resolver;
     }
