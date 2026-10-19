@@ -1,3 +1,4 @@
+
 package com.example.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,15 @@ public class SecurityConfig {
     private OAuth2LoginSuccessHandler successHandler;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, OAuth2AuthorizationRequestResolver authorizationRequestResolver) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            OAuth2AuthorizationRequestResolver authorizationRequestResolver)
+            throws Exception {
 
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated()).oauth2Login(oauth -> oauth.authorizationEndpoint(endpoint -> endpoint.authorizationRequestResolver(authorizationRequestResolver)).successHandler(successHandler));
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/digest/test"))
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .oauth2Login(oauth -> oauth.authorizationEndpoint(endpoint -> endpoint.authorizationRequestResolver(authorizationRequestResolver)).successHandler(successHandler));
+
         return http.build();
     }
 }

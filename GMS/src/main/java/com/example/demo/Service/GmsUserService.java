@@ -5,7 +5,6 @@ import com.example.demo.Model.GmsUser;
 import com.example.demo.Repo.userInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
