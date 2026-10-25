@@ -11,13 +11,8 @@ import java.util.Map;
 public class AuthController {
 
     @GetMapping("/api/me")
-    public Map<String, String> currentUser(
-            @AuthenticationPrincipal OidcUser user) {
+    public Map<String, String> currentUser(@AuthenticationPrincipal OidcUser user) {
 
-        return Map.of(
-                "name", user.getFullName(),
-                "email", user.getEmail(),
-                "message", "Google login successful"
-        );
+        return Map.of("name", user.getFullName(), "email", user.getEmail(), "message", "Google login successful");
     }
 }
