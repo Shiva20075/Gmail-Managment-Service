@@ -3,20 +3,16 @@ package com.example.demo.Service;
 
 import com.example.demo.Model.AiResponse;
 import com.example.demo.Model.Gmail;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.StopReason;
 import com.anthropic.models.messages.TextBlock;
-
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -65,6 +61,10 @@ public class AiService {
             }
 
             String responseText = message.content().stream().flatMap(block -> block.text().stream()).map(TextBlock::text).collect(Collectors.joining());
+
+            System.out.println("Claude stop reason: " + message.stopReason());
+            System.out.println("Claude raw response: " + responseText);
+
             List<AiResponse> responses = objectMapper.readValue(cleanJsonResponse(responseText), new TypeReference<List<AiResponse>>() {});
             validateResponses(account, emails, responses);
             return responses;
