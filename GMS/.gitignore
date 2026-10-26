@@ -36,3 +36,7 @@ build/
 src/main/resources/application-local.properties
 .env
 .env
+# Build and deployment artifacts
+target/
+deploy-bundle/
+gms-deployment.zip
