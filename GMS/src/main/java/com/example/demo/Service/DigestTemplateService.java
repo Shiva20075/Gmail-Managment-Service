@@ -1,3 +1,4 @@
+
 package com.example.demo.Service;
 import com.example.demo.Model.AiResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,7 @@ public class DigestTemplateService {
     private final TemplateEngine templateEngine;
     private final String actionBaseUrl;
 
-    public DigestTemplateService(@Value("${gms.action-base-url:http://localhost:8081/api/emails}") String actionBaseUrl) {
+    public DigestTemplateService(@Value("${gms.action-base-url:https://gmail-managment-service.onrender.com/api/emails}") String actionBaseUrl) {
 
         this.actionBaseUrl = actionBaseUrl;
 
