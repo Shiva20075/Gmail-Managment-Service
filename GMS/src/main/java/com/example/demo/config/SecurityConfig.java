@@ -21,7 +21,7 @@ public class SecurityConfig {
             throws Exception {
 
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/digest/test"))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/health").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/health","/api/process-emails").permitAll().anyRequest().authenticated())
                 .oauth2Login(oauth -> oauth.authorizationEndpoint(endpoint -> endpoint.authorizationRequestResolver(authorizationRequestResolver)).successHandler(successHandler));
 
         return http.build();
