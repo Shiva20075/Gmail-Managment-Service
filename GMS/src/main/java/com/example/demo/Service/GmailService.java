@@ -24,7 +24,7 @@ public class GmailService {
             do {
                 String token = pageToken;
 
-                JsonNode page = restClient.get().uri(uri -> {uri.path("/messages").queryParam("q", "newer_than:1d in:anywhere").queryParam("maxResults", 100);
+                JsonNode page = restClient.get().uri(uri -> uri.path("/messages").queryParam("maxResults", 100).build()).retrieve().body(JsonNode.class);
                             if (token != null) {
                                 uri.queryParam("pageToken", token);
                             }
