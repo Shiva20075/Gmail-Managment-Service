@@ -1,9 +1,11 @@
 
 package com.example.demo.Service;
+
 import com.example.demo.Model.Gmail;
 import tools.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -12,44 +14,35 @@ import java.util.List;
 @Service
 public class GmailService {
 
-    private static final String GMAIL_API = "https://gmail.googleapis.com/gmail/v1/users/me";
+    private static final String GMAIL_API =
+            "https://gmail.googleapis.com/gmail/v1/users/me";
+
     private final RestClient restClient = RestClient.create(GMAIL_API);
 
     public List<Gmail> fetchRecentEmails(String accessToken) {
 
         List<Gmail> emails = new ArrayList<>();
-        String pageToken = null;
 
         try {
-            do {
-                String token = pageToken;
+            JsonNode page = restClient.get()
+                    .uri(uri -> uri.path("/messages")
+                            .queryParam("maxResults", 100)
+                            .build())
+                    .headers(h -> h.setBearerAuth(accessToken))
+                    .retrieve()
+                    .body(JsonNode.class);
 
-                JsonNode page = restClient.get().uri(uri -> uri.path("/messages").queryParam("maxResults", 100).build()).retrieve().body(JsonNode.class);
-                            if (token != null) {
-                                uri.queryParam("pageToken", token);
-                            }
-                            return uri.build();
-                        })
-                        .headers(h -> h.setBearerAuth(accessToken))
-                        .retrieve()
-                        .body(JsonNode.class);
+            if (page == null) {
+                return emails;
+            }
 
-                if (page == null) {
-                    break;
+            for (JsonNode message : page.path("messages")) {
+                String messageId = message.path("id").asString();
+
+                if (!messageId.isBlank()) {
+                    emails.add(fetchSingleEmail(messageId, accessToken));
                 }
-
-                for (JsonNode message : page.path("messages")) {
-                    String messageId = message.path("id").asString();
-
-                    if (!messageId.isBlank()) {
-                        emails.add(fetchSingleEmail(messageId, accessToken));
-                    }
-                }
-
-                String next = page.path("nextPageToken").asString();
-                pageToken = next.isBlank() ? null : next;
-
-            } while (pageToken != null);
+            }
 
             System.out.println("Total emails fetched: " + emails.size());
             return emails;
@@ -88,7 +81,13 @@ public class GmailService {
             }
         }
 
-        return new Gmail(messageId, sender, subject, date, payload == null ? "" : extractBody(payload));
+        return new Gmail(
+                messageId,
+                sender,
+                subject,
+                date,
+                payload == null ? "" : extractBody(payload)
+        );
     }
 
     private String extractBody(JsonNode payload) {
@@ -104,7 +103,9 @@ public class GmailService {
 
     private String extractMimePart(JsonNode part, String desiredMimeType) {
 
-        if (desiredMimeType.equalsIgnoreCase(part.path("mimeType").asString())) {
+        if (desiredMimeType.equalsIgnoreCase(
+                part.path("mimeType").asString())) {
+
             String data = part.path("body").path("data").asString();
 
             if (!data.isBlank()) {
