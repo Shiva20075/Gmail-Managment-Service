@@ -18,10 +18,10 @@ public class DigestTemplateService {
 
         this.actionBaseUrl = actionBaseUrl;
         this.templateEngine = new TemplateEngine();
-        this.templateEngine.setTemplateResolver(resolver);
         
         StringTemplateResolver resolver = new StringTemplateResolver();
         resolver.setTemplateMode("HTML");
+        this.templateEngine.setTemplateResolver(resolver);
 
     }
 
