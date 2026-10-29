@@ -1,5 +1,6 @@
 
 package com.example.demo.Service;
+
 import com.example.demo.Model.Gmail;
 import tools.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,10 @@ public class GmailService {
         String pageToken = null;
 
         try {
+            
             do {
+                
                 String token = pageToken;
-
                 JsonNode page = restClient.get().uri(uri -> {uri.path("/messages").queryParam("q", "newer_than:1d in:anywhere").queryParam("maxResults", 100);
                             if (token != null) {
                                 uri.queryParam("pageToken", token);
@@ -39,6 +41,7 @@ public class GmailService {
                 }
 
                 for (JsonNode message : page.path("messages")) {
+                    
                     String messageId = message.path("id").asString();
 
                     if (!messageId.isBlank()) {
@@ -64,12 +67,7 @@ public class GmailService {
 
     private Gmail fetchSingleEmail(String messageId, String accessToken) {
 
-        JsonNode message = restClient.get()
-                .uri("/messages/{id}?format=full", messageId)
-                .headers(h -> h.setBearerAuth(accessToken))
-                .retrieve()
-                .body(JsonNode.class);
-
+        JsonNode message = restClient.get().uri("/messages/{id}?format=full", messageId).headers(h -> h.setBearerAuth(accessToken)).retrieve().body(JsonNode.class);
         JsonNode payload = message == null ? null : message.path("payload");
 
         String sender = "";
@@ -126,12 +124,12 @@ public class GmailService {
     private String decodeBase64Url(String data) {
 
         try {
+            
             byte[] decoded = Base64.getUrlDecoder().decode(data);
             return new String(decoded, StandardCharsets.UTF_8);
+            
         } catch (IllegalArgumentException e) {
-            throw new IllegalStateException(
-                    "Could not decode Gmail message body", e
-            );
+            throw new IllegalStateException("Could not decode Gmail message body", e);
         }
     }
 
