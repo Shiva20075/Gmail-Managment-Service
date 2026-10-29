@@ -5,7 +5,6 @@ import com.example.demo.Model.AiResponse;
 import com.example.demo.Model.Gmail;
 import com.example.demo.Model.GmsUser;
 import com.example.demo.Repo.userInterface;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -49,6 +48,7 @@ public class EmailProcessingService {
 
         for (GmsUser user : users) {
             try {
+                
                 String email = user.getEmail();
                 String refreshToken = user.getEncryptedRefreshToken();
 
