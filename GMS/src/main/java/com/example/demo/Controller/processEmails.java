@@ -15,6 +15,7 @@ public class processEmails {
 
     @GetMapping(value = "/process-emails", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> processEmails() {
+        
         emailProcessingService.processAllUsers();
         return ResponseEntity.ok("All users' digests processed");
     }
