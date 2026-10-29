@@ -17,12 +17,12 @@ public class DigestTemplateService {
     public DigestTemplateService(@Value("${gms.action-base-url:https://gmail-managment-service.onrender.com/api/emails}") String actionBaseUrl) {
 
         this.actionBaseUrl = actionBaseUrl;
-
+        this.templateEngine = new TemplateEngine();
+        this.templateEngine.setTemplateResolver(resolver);
+        
         StringTemplateResolver resolver = new StringTemplateResolver();
         resolver.setTemplateMode("HTML");
 
-        this.templateEngine = new TemplateEngine();
-        this.templateEngine.setTemplateResolver(resolver);
     }
 
     public String generateDigest(String account, List<AiResponse> responses) {
