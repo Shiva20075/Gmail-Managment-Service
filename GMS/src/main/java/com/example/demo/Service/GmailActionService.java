@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +18,7 @@ public class GmailActionService {
 
         validateIds(ids);
 
-        restClient.post()
-                .uri("/messages/batchModify")
+        restClient.post().uri("/messages/batchModify")
                 .headers(headers -> headers.setBearerAuth(accessToken))
                 .body(Map.of("ids", ids, "removeLabelIds", List.of("UNREAD")))
                 .retrieve()
@@ -31,8 +29,7 @@ public class GmailActionService {
 
         validateIds(ids);
 
-        restClient.post()
-                .uri("/messages/batchModify")
+        restClient.post().uri("/messages/batchModify")
                 .headers(headers -> headers.setBearerAuth(accessToken))
                 .body(Map.of("ids", ids, "addLabelIds", List.of("IMPORTANT")))
                 .retrieve()
@@ -44,8 +41,7 @@ public class GmailActionService {
         validateIds(ids);
 
         for (String id : ids) {
-            restClient.post()
-                    .uri("/messages/{id}/trash", id)
+            restClient.post().uri("/messages/{id}/trash", id)
                     .headers(headers -> headers.setBearerAuth(accessToken))
                     .retrieve()
                     .toBodilessEntity();
