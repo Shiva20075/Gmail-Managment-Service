@@ -101,7 +101,6 @@ public class AiService {
         Map<String, Integer> emailCounts = new HashMap<>();
         Map<String, String> expectedEmails = new HashMap<>();
 
-
         for (Gmail email : emails) {
 
             if (email.getId() == null || email.getSender() == null) {
