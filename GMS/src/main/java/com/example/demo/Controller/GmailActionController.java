@@ -16,58 +16,28 @@ public class GmailActionController {
     @Autowired
     private GmailActionService gmailActionService;
 
-    @PostMapping("/mark-read")
-    public ResponseEntity<String> markAsRead(@RequestBody EmailActionRequest request, @RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
-
-        String accessToken = authorizedClient.getAccessToken().getTokenValue();
-        gmailActionService.markAsRead(accessToken, request.getIds());
-        return ResponseEntity.ok("Emails marked as read successfully.");
-
-    }
-
-    @PostMapping("/mark-important")
-    public ResponseEntity<String> markAsImportant(@RequestBody EmailActionRequest request, @RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
-
-        String accessToken = authorizedClient.getAccessToken().getTokenValue();
-        gmailActionService.markAsImportant(accessToken, request.getIds());
-        return ResponseEntity.ok("Emails marked as important successfully.");
-
-    }
-
-    @PostMapping("/delete")
-    public ResponseEntity<String> deleteAll(@RequestBody EmailActionRequest request, @RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
-
-        String accessToken = authorizedClient.getAccessToken().getTokenValue();
-        gmailActionService.deleteAll(accessToken, request.getIds());
-        return ResponseEntity.ok("Emails moved to Trash successfully.");
-
-    }
-
-
     @GetMapping("/mark-read")
-    public ResponseEntity<String> markAsReadLink(@RequestParam List<String> ids, @RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
+    public ResponseEntity<String> markAsRead( @RequestParam List<String> ids,@RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
 
         String accessToken = authorizedClient.getAccessToken().getTokenValue();
         gmailActionService.markAsRead(accessToken, ids);
         return ResponseEntity.ok("Emails marked as read successfully.");
-
+        
     }
 
     @GetMapping("/mark-important")
-    public ResponseEntity<String> markAsImportantLink(@RequestParam List<String> ids, @RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
+    public ResponseEntity<String> markAsImportant( @RequestParam List<String> ids,@RegisteredOAuth2AuthorizedClient("google")OAuth2AuthorizedClient authorizedClient) {
 
         String accessToken = authorizedClient.getAccessToken().getTokenValue();
         gmailActionService.markAsImportant(accessToken, ids);
         return ResponseEntity.ok("Emails marked as important successfully.");
-
     }
 
     @GetMapping("/delete")
-    public ResponseEntity<String> deleteAllLink(@RequestParam List<String> ids, @RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
+    public ResponseEntity<String> deleteAll( @RequestParam List<String> ids,@RegisteredOAuth2AuthorizedClient("google")OAuth2AuthorizedClient authorizedClient) {
 
         String accessToken = authorizedClient.getAccessToken().getTokenValue();
         gmailActionService.deleteAll(accessToken, ids);
         return ResponseEntity.ok("Emails moved to Trash successfully.");
-
     }
 }
