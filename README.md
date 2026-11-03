@@ -33,7 +33,7 @@
   ## 📸 Daily Digest Preview
 
   <p align="center">
-    <img src="GMS%20CODE/.idea/gms.png" alt="Daily Email Digest" width="700"/>
+    <img src="GMS%20CODE/.idea/digest-preview.svg" alt="Daily Email Digest" width="640"/>
   </p>
 
   ---
