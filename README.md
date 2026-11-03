@@ -22,7 +22,7 @@
 
   **Gmail Management Service (GMS)** is a Java-based backend application developed using **Spring Boot** to automate daily Gmail inbox management. It retrieves emails received during the previous **24 hours**, analyzes their content using **AI**, categorizes them based on their importance, and generates a summary for each email.
 
-  The processed emails are combined into a single **daily email digest**, containing details such as the sender, subject, category, and AI-generated summary. The digest also provides action buttons such as **Delete**, **Mark as Important**, **Mark as Spam**, allowing users to manage their emails directly.
+  The processed emails are combined into a single **daily email digest**, containing details such as the sender, subject, category, and AI-generated summary. The digest also provides action buttons such as **Delete**, **Mark as Important**, **Mark as Read**, allowing users to manage their emails directly.
 
   The entire workflow is automated using **AWS EventBridge** and **AWS Lambda**, which trigger the email processing workflow every 24 hours and deliver the generated digest to the user at a scheduled time.
 
@@ -172,9 +172,11 @@
   ```bash
   export GOOGLE_CLIENT_ID=your_client_id
   export GOOGLE_CLIENT_SECRET=your_client_secret
-  export OPENAI_API_KEY=your_openai_api_key
+  export API_KEY=your_api_key
   export DB_USERNAME=your_mysql_username
   export DB_PASSWORD=your_mysql_password
+
+  And a prompt for AI
   ```
 
   ### 3. Build and run
