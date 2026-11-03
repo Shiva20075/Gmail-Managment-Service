@@ -191,3 +191,13 @@ Open the auth endpoint in your browser, sign in with Google and grant Gmail perm
 - Refresh tokens are stored securely and kept out of logs
 
 ---
+
+
+## References 📚
+
+
+- [Gmail API Documentation](https://developers.google.com/workspace/gmail/api/guides)
+- [Google OAuth 2.0 Documentation](https://developers.google.com/identity/protocols/oauth2)
+- [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/)
+- [AWS EventBridge Documentation](https://docs.aws.amazon.com/eventbridge/)
+- [Thymeleaf Documentation](https://www.thymeleaf.org/documentation.html)
