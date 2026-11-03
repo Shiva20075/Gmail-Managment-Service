@@ -15,10 +15,7 @@ public class SecurityConfig {
     private OAuth2LoginSuccessHandler successHandler;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http,
-            OAuth2AuthorizationRequestResolver authorizationRequestResolver)
-            throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, OAuth2AuthorizationRequestResolver authorizationRequestResolver)throws Exception {
 
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/digest/test"))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/health","/api/process-emails").permitAll().anyRequest().authenticated())
