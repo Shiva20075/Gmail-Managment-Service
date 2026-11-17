@@ -6,7 +6,6 @@
     <img src="https://img.shields.io/badge/Spring%20Boot-4.1-6DB33F?logo=springboot&logoColor=white" alt="Spring Boot" />
     <img src="https://img.shields.io/badge/Spring%20Security-OAuth%202.0-6DB33F?logo=springsecurity&logoColor=white" alt="OAuth 2.0" />
     <img src="https://img.shields.io/badge/Gmail%20API-EA4335?logo=gmail&logoColor=white" alt="Gmail API" />
-    <img src="https://img.shields.io/badge/AI-Claude-D97757?logo=anthropic&logoColor=white" alt="Claude AI" />
     <img src="https://img.shields.io/badge/MySQL-Amazon%20RDS-4479A1?logo=mysql&logoColor=white" alt="MySQL on RDS" />
     <img src="https://img.shields.io/badge/AWS-Lambda-FF9900?logo=awslambda&logoColor=white" alt="AWS Lambda" />
     <img src="https://img.shields.io/badge/AWS-EventBridge-FF4F8B?logo=amazonaws&logoColor=white" alt="AWS EventBridge" />
