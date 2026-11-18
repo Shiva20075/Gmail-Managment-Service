@@ -1,4 +1,3 @@
-
 package com.example.demo.Controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
